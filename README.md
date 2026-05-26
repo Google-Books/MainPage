@@ -1,415 +1,101 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fa" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Google Books - Premium Laser Portal</title>
+    <title>Google Books - Premium Portal</title>
     <style>
-        /* =============================================================
-           ۱. متغیرهای رنگی پیشرفته لیزری مچ شده با تصویر ارسالی شما
-           ============================================================= */
         :root {
-            --bg-dark-premium: #0d1326;   /* رنگ دقیق پس‌زمینه تیره و لوکس پوسته تصویر */
-            --row-bg: rgba(255, 255, 255, 0.02); /* پس‌زمینه شیشه‌ای فوق‌العاده ملایم ردیف‌ها */
-            --laser-glow-color: rgba(139, 92, 246, 0.25); /* هاله نئونی لیزری بنفش-فیروزه‌ای */
-            --text-gray-muted: #7f92a5;   /* خاکستری ملایم برای توضیحات ارشیوها */
-            --transition-smooth: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            --tg-dark-bg: #17212b;
+            --laser-blue: #00f0ff;
+            --laser-glow: rgba(0, 240, 255, 0.45);
+            --btn-blue: #2481cc;
+            --btn-shadow: rgba(11, 44, 71, 0.95);
+            --card-radius: 35px;
+            --transition-smooth: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
         }
-
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', system-ui, sans-serif; }
-
-        body {
-            background-color: var(--bg-dark-premium); color: #ffffff; display: flex; flex-direction: column;
-            align-items: center; justify-content: flex-start; min-height: 100vh; padding: 60px 24px;
-            overflow-x: hidden; -webkit-font-smoothing: antialiased;
-        }
-
-        /* =============================================================
-           ۲. ساختار هدر و عنوان اصلی صفحه
-           ============================================================= */
-        .header-container { width: 100%; max-width: 900px; margin-bottom: 50px; }
-        
-        .back-btn {
-            display: inline-flex; align-items: center; color: #ffffff; text-decoration: none;
-            font-size: 16px; font-weight: 600; margin-bottom: 35px; transition: var(--transition-smooth);
-        }
-        .back-btn:hover { transform: translateX(-4px); color: #00f0ff; }
-
-        .main-title { 
-            font-size: 2.4rem; font-weight: 900; text-align: center; line-height: 1.35; letter-spacing: -0.5px;
-            background: linear-gradient(180deg, #ffffff 0%, #b0c4de 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
-        }
-
-        /* =============================================================
-           ۳. استایل ردیف‌های آرشیو با دیواره خط لیزری بسیار قشنگ
-           ============================================================= */
-        .archive-list { width: 100%; max-width: 900px; display: flex; flex-direction: column; gap: 18px; }
-
-        .archive-row {
-            display: flex; align-items: center; width: 100%; background-color: var(--row-bg);
-            border: 1px solid rgba(139, 92, 246, 0.2); border-radius: 20px; padding: 22px 28px;
-            text-decoration: none; color: #ffffff; transition: var(--transition-smooth);
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2), 0 0 10px var(--laser-glow-color);
-        }
-        
-        .archive-row:hover {
-            background-color: rgba(255, 255, 255, 0.04); 
-            border-color: #00f0ff;
-            transform: translateY(-3px) scale(1.01); 
-            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(0, 240, 255, 0.3);
-        }
-
-        /* حفظ فریم کپسولی/دایره‌ای شیک دور آیکون‌ها */
-        .icon-box { 
-            display: flex; align-items: center; justify-content: center; width: 56px; height: 56px;
-            background: rgba(139, 92, 246, 0.1); border: 1px solid rgba(139, 92, 246, 0.3);
-            border-radius: 50%; margin-right: 24px; flex-shrink: 0; transition: var(--transition-smooth);
-        }
-        .archive-row:hover .icon-box { background: rgba(0, 240, 255, 0.15); border-color: #00f0ff; box-shadow: 0 0 12px rgba(0, 240, 255, 0.4); }
-
-        /* استایل آیکون‌های شاهکار چندرنگ */
-        .book-icon-master { width: 34px; height: 34px; transition: var(--transition-smooth); }
-        .archive-row:hover .book-icon-master { transform: scale(1.1) rotate(-3deg); filter: drop-shadow(0 0 8px #00f0ff); }
-
-        .text-box { display: flex; flex-direction: column; gap: 6px; }
-        .archive-title { font-size: 18px; font-weight: 700; letter-spacing: -0.1px; transition: var(--transition-smooth); }
-        .archive-row:hover .archive-title { color: #00f0ff; text-shadow: 0 0 8px rgba(0, 240, 255, 0.3); }
-        .archive-desc { font-size: 14px; color: var(--text-gray-muted); line-height: 1.45; }
-
-        /* واکنش‌گرایی موبایل */
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; }
+        body { background-color: var(--tg-dark-bg); color: #ffffff; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; min-height: 100vh; padding: 160px 24px 60px 24px; position: relative; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+        .telegram-btn { position: fixed; top: 30px; left: 50%; transform: translateX(-50%); z-index: 10000; background: linear-gradient(135deg, #00f0ff, #0066ff); color: #ffffff; text-decoration: none; padding: 13px 38px; border-radius: 20px; font-size: 15px; font-weight: 700; display: flex; align-items: center; justify-content: center; gap: 12px; border: 1px solid rgba(255, 255, 255, 0.25); box-shadow: 0 8px 25px var(--laser-glow), inset 0 1px 2px rgba(255, 255, 255, 0.4); transition: var(--transition-smooth); white-space: nowrap; }
+        .telegram-btn:hover { transform: translateX(-50%) translateY(-3px); box-shadow: 0 12px 35px rgba(0, 240, 255, 0.7); filter: brightness(1.1); }
+        .telegram-icon { width: 22px; height: 22px; fill: #ffffff; transition: var(--transition-smooth); }
+        .telegram-btn:hover .telegram-icon { transform: scale(1.1); }
+        .main-title { font-size: 3rem; font-weight: 900; text-align: center; margin-bottom: 70px; line-height: 1.2; letter-spacing: -1px; background: linear-gradient(180deg, #ffffff 0%, #b0c4de 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5); }
+        .cards-container { display: grid; grid-template-columns: repeat(3, minmax(260px, 340px)); gap: 50px; width: 100%; max-width: 1200px; justify-content: center; }
+        .card-wrapper { display: flex; flex-direction: column; align-items: center; width: 100%; background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.06); padding: 22px; border-radius: calc(var(--card-radius) + 10px); box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3); transition: var(--transition-smooth); }
+        .card-wrapper:hover { transform: translateY(-8px); background: rgba(255, 255, 255, 0.05); border-color: rgba(255, 255, 255, 0.12); box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5); }
+        .card-img-box { width: 100%; aspect-ratio: 1 / 1; background-color: #ffffff; border-radius: var(--card-radius); padding: 20px; display: flex; align-items: center; justify-content: center; margin-bottom: 22px; box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3); transition: var(--transition-smooth); }
+        .card-img { max-width: 100%; max-height: 100%; object-fit: contain; transition: var(--transition-smooth); }
+        .card-wrapper:hover .card-img { transform: scale(1.05); }
+        .card-btn { width: 100%; background-color: var(--btn-blue); color: #ffffff; text-decoration: none; text-align: center; padding: 14px 20px; border-radius: 16px; font-size: 15px; font-weight: 600; box-shadow: 0 10px 22px var(--btn-shadow); border: 1px solid rgba(255, 255, 255, 0.08); transition: var(--transition-smooth); }
+        .card-btn:hover { background-color: #2b96eb; box-shadow: 0 12px 28px rgba(36, 129, 204, 0.5); transform: translateY(-1px); }
+        .attribution { display: none; }
+        @media (max-width: 950px) { .cards-container { grid-template-columns: repeat(2, minmax(240px, 320px)); gap: 40px; } .main-title { font-size: 2.5rem; } }
         @media (max-width: 600px) {
-            body { padding: 40px 16px; }
-            .main-title { font-size: 1.6rem; }
-            .archive-row { padding: 18px; border-radius: 16px; }
-            .icon-box { margin-right: 16px; width: 46px; height: 46px; }
-            .book-icon-master { width: 28px; height: 28px; }
-            .archive-title { font-size: 16px; }
-            .archive-desc { font-size: 12px; }
+            body { padding-top: 130px; padding-left: 12px; padding-right: 12px; }
+.main-title { font-size: 1.8rem; margin-bottom: 45px; }
+            .cards-container { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+            .card-wrapper { padding: 10px; border-radius: 25px; }
+            .card-img-box { border-radius: 20px; padding: 10px; margin-bottom: 12px; }
+            .card-btn { font-size: 11px; padding: 11px 4px; border-radius: 12px; box-shadow: 0 6px 14px var(--btn-shadow); }
+            .telegram-btn { padding: 11px 24px; font-size: 13px; top: 20px; border-radius: 14px; box-shadow: 0 6px 18px var(--laser-glow); }
         }
     </style>
 </head>
 <body>
 
-    <div class="header-container">
-        <a href="index.html" class="back-btn">&larr; Back</a>
-        <h1 class="main-title">We Try Our Best To Provide You The Best And Largest Sources!</h1>
+    <!-- دکمه شناور تلگرام متصل به لینک درخواستی شما -->
+    <a href="https://books-photoes.webflow.io/old-home" class="telegram-btn">
+        <span>Our Telegram channels</span>
+        <!-- آیکون رسمی، ترمیم‌شده و کاملاً متقارن هواپیمای کاغذی تلگرام از Flaticon -->
+        <svg class="telegram-icon" viewBox="0 0 24 24">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-1-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.2-.08-.06-.19-.04-.27-.02-.11.02-1.93 1.23-5.46 3.62-.51.35-.98.52-1.4.51-.46-.01-1.35-.26-2.01-.48-.81-.27-1.46-.42-1.4-.88.03-.24.38-.49 1.04-.74 4.07-1.77 6.79-2.94 8.15-3.5 3.89-1.61 4.7-1.89 5.23-1.9.11 0 .37.03.54.17.14.12.18.28.2.45-.02.07-.02.13-.03.2z"/>
+        </svg>
+    </a>
+
+    <h1 class="main-title">Welcome To<br>Google Books!</h1>
+
+    <div class="cards-container">
+        <!-- کارت اول: کتاب‌های رایگان (با لینک تصویر کاملاً سالم و فیکس‌شده) -->
+        <div class="card-wrapper">
+            <div class="card-img-box">
+                <img src="https://trilliardaire.sirv.com/FreeBooks.png" alt="Free Books" class="card-img" crossorigin="anonymous">
+            </div>
+            <a href="#" class="card-btn">Free Books</a>
+        </div>
+
+        <!-- کارت دوم: کتاب‌های صوتی رایگان (با لینک تصویر کاملاً بازسازی شده و بدون کوتاه‌شدگی) -->
+        <div class="card-wrapper">
+            <div class="card-img-box">
+                <img src="https://trilliardaire.sirv.com/%DA%A9%D8%AA%D8%A7%D8%A8%20%D9%87%D8%A7%DB%8C%20%DA%AF%D9%88%DA%AF%D9%84/audio.avif" alt="Free Audio Books" class="card-img" crossorigin="anonymous">
+            </div>
+            <a href="https://audiobookbay.lu" target="_blank" class="card-btn">Free Audio Books</a>
+        </div>
+
+        <!-- کارت سوم: بهترین کتاب‌های سال ۲۰۲۶ (با لینک تصویر کاملاً بازسازی شده و بدون کوتاه‌شدگی) -->
+        <div class="card-wrapper">
+            <div class="card-img-box">
+                <img src="https://trilliardaire.sirv.com/%DA%A9%D8%AA%D8%A7%D8%A8%20%D9%87%D8%A7%DB%8C%20%DA%AF%D9%88%DA%AF%D9%84/b_best%202026.avif" alt="The Best Books of 2026" class="card-img" crossorigin="anonymous">
+            </div>
+            <a href="https://books-photoes.webflow.io/" class="card-btn">The Best Books of 2026</a>
+        </div>
     </div>
 
-    <div class="archive-list">
+<!-- خط کپی‌رایت فلات‌آیکون درخواستی شما -->
+    <div class="attribution">
+        <a href="https://www.flaticon.com/free-icons/telegram" title="telegram icons">Telegram icons created by See Icons - Flaticon</a>
+    </div>
 
-        <!-- آرشیو ۱: اقیانوس کتاب‌ها - شاهکار کتاب کریستالی باز شده سه‌بعدی با هاله صورتی و فیروزه‌ای -->
-        <a href="https://oceanofpdf.com" target="_blank" class="archive-row">
-            <div class="icon-box">
-                <svg class="book-icon-master" viewBox="0 0 32 32">
-                    <defs>
-                        <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
-                            <stop offset="0%" style="stop-color:#00f0ff;stop-opacity:1" />
-                            <stop offset="100%" style="stop-color:#ec4899;stop-opacity:1" />
-                        </linearGradient>
-                    </defs>
-                    <path d="M2 26s5-4 14-4 14 4 14 4V6s-5-4-14-4-14 4-14 4v20z" fill="url(#grad1)" />
-                    <path d="M16 2v20" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round"/>
-                    <path d="M6 8h6M6 12h6M6 16h4M20 8h6M20 12h6M22 16h4" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round"/>
-                </svg>
-            </div>
-            <div class="text-box">
-                <div class="archive-title">The First Archive</div>
-                <div class="archive-desc">The fastest and safest library in the world with new books and romances.</div>
-            </div>
-        </a>
+    <!-- Social Bar Ad -->
+    <script src="https://speedingdeadlyplays.com/b3/e9/4d/b3e94d023432c8cb40b981d7804166a2.js"></script>
 
-        <!-- آرشیو ۲: وی‌لیب - نماد رادار جستجوی لیزری روی کتاب باز نقره‌ای متمایز -->
-        <a href="https://welib.st" target="_blank" class="archive-row">
-            <div class="icon-box">
-                <svg class="book-icon-master" viewBox="0 0 32 32">
-                    <defs>
-                        <linearGradient id="grad2" x1="0%" y1="0%" x2="100%" y2="100%">
-                            <stop offset="0%" style="stop-color:#38bdf8;stop-opacity:1" />
-                            <stop offset="100%" style="stop-color:#a855f7;stop-opacity:1" />
-                        </linearGradient>
-                    </defs>
-                    <path d="M4 24s4-3 12-3 12 3 12 3V7s-4-3-12-3-12 3-12 3v17z" fill="url(#grad2)" opacity="0.8"/>
-                    <circle cx="16" cy="14" r="6" fill="none" stroke="#00f0ff" stroke-width="2" />
-                    <line x1="20.5" y1="18.5" x2="26" y2="24" stroke="#00f0ff" stroke-width="2.5" stroke-linecap="round"/>
-                </svg>
-            </div>
-            <div class="text-box">
-                <div class="archive-title">The Second Archive</div>
-                <div class="archive-desc">PDF search engine with an extensive categorized database.</div>
-            </div>
-        </a>
+</body>
+</html>
 
-        <!-- آرشیو ۳: اینترنت آرشیو - عمارت سه‌بعدی یونانی بنا شده بر روی کتاب طلایی غول‌پیکر تجسم علم -->
-        <a href="https://archive.org" target="_blank" class="archive-row">
-            <div class="icon-box">
-                <svg class="book-icon-master" viewBox="0 0 32 32">
-                    <defs>
-                        <linearGradient id="grad3" x1="0%" y1="0%" x2="0%" y2="100%">
-                            <stop offset="0%" style="stop-color:#eab308;stop-opacity:1" />
-                            <stop offset="100%" style="stop-color:#3b82f6;stop-opacity:1" />
-                        </linearGradient>
-                    </defs>
-                    <path d="M4 24h24v3H4z" fill="#eab308"/>
-                    <path d="M6 21h3v3H6zm5 0h3v3h-3zm5 0h3v3h-3zm5 0h3v3h-3zm5 0h3v3h-3z" fill="#ffffff"/>
-                    <path d="M5 11l11-7 11 7v3H5z" fill="url(#grad3)"/>
-                    <path d="M2 25c0 1.1.9 2 2 2h24c1.1 0 2-.9 2-2s-.9-2-2-2H4c-1.1 0-2 .9-2 2z" fill="#ffffff"/>
-                </svg>
-            </div>
-            <div class="text-box">
-                <div class="archive-title">The Third Archive</div>
-                <div class="archive-desc">Digital library with millions of books, articles, magazines, plus movies, music.</div>
-            </div>
-        </a>
-        <!-- آرشیو ۴: ویکی‌سورس - تومار و لوح چاپی نئون یاقوتی اصیل نماد مستندات تاریخی -->
-        <a href="https://wikisource.org" target="_blank" class="archive-row">
-            <div class="icon-box">
-                <svg class="book-icon-master" viewBox="0 0 32 32">
-                    <defs>
-                        <linearGradient id="grad4" x1="0%" y1="0%" x2="100%" y2="100%">
-                            <stop offset="0%" style="stop-color:#f43f5e;stop-opacity:1" />
-                            <stop offset="100%" style="stop-color:#f97316;stop-opacity:1" />
-                        </linearGradient>
-                    </defs>
-                    <path d="M19 2H6c-1.1 0-2 .9-2 2v24c0 1.1.9 2 2 2h20c1.1 0 2-.9 2-2V11l-9-9z" fill="url(#grad4)"/>
-                    <path d="M19 2v9h9M8 12h10M8 17h16M8 22h16" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-            </div>
-            <div class="text-box">
-                <div class="archive-title">The Fourth Archive</div>
-                <div class="archive-desc">Free digital library with full-text books, novels, historical documents, and speeches.</div>
-            </div>
-        </a>
-
-        <!-- آرشیو ۵: اوپن لایبرری - نماد کتابخانه لایو و قفسه کتاب شیشه‌ای چندرنگ جهانی -->
-        <a href="https://openlibrary.org" target="_blank" class="archive-row">
-            <div class="icon-box">
-                <svg class="book-icon-master" viewBox="0 0 32 32">
-                    <defs>
-                        <linearGradient id="grad5" x1="0%" y1="0%" x2="100%" y2="100%">
-                            <stop offset="0%" style="stop-color:#10b981;stop-opacity:1" />
-                            <stop offset="100%" style="stop-color:#059669;stop-opacity:1" />
-                        </linearGradient>
-                    </defs>
-                    <rect x="4" y="4" width="24" height="24" rx="4" fill="url(#grad5)"/>
-                    <path d="M9 8h2v16H9zm5 0h3v16h-3zm6 0h3v16h-3z" fill="#ffffff" opacity="0.9"/>
-                    <line x1="4" y1="14" x2="28" y2="14" stroke="#0d1326" stroke-width="2"/>
-                    <line x1="4" y1="20" x2="28" y2="20" stroke="#0d1326" stroke-width="2"/>
-                </svg>
-            </div>
-            <div class="text-box">
-                <div class="archive-title">The Fifth Archive</div>
-                <div class="archive-desc">Old archive with millions of valuable scanned vintage books.</div>
-            </div>
-        </a>
-
-        <!-- آرشیو ۶: گوگل اسکالر - کلاه‌فارغ‌التحصیلی لوکس و سلطنتی زمردین معلق بر روی کتاب مرجع علم -->
-        <a href="https://gutenberg.org" target="_blank" class="archive-row">
-            <div class="icon-box">
-                <svg class="book-icon-master" viewBox="0 0 32 32">
-                    <defs>
-                        <linearGradient id="grad6" x1="0%" y1="0%" x2="100%" y2="100%">
-                            <stop offset="0%" style="stop-color:#06b6d4;stop-opacity:1" />
-                            <stop offset="100%" style="stop-color:#3b82f6;stop-opacity:1" />
-                        </linearGradient>
-                    </defs>
-                    <path d="M16 4L3 10l13 6 13-6-13-6z" fill="url(#grad6)"/>
-                    <path d="M7 13.5V20c0 2 4 4 9 4s9-2 9-4v-6.5" fill="none" stroke="#00f0ff" stroke-width="2"/>
-                    <path d="M25 11v8" fill="none" stroke="#ffffff" stroke-width="2"/>
-                    <circle cx="25" cy="19" r="2" fill="#ffffff"/>
-                </svg>
-            </div>
-            <div class="text-box">
-                <div class="archive-title">The Sixth Archive</div>
-                <div class="archive-desc">The oldest digital library project focused on classic works.</div>
-            </div>
-        </a>
-
-        <!-- آرشیو ۷: منی‌بوکس - کتاب طلایی درخشان باز شده مجهز به نشان ستاره فروزان ۵ ستاره اصالت -->
-        <a href="https://manybooks.net" target="_blank" class="archive-row">
-            <div class="icon-box">
-                <svg class="book-icon-master" viewBox="0 0 32 32">
-                    <path d="M2 26s5-4 14-4 14 4 14 4V6s-5-4-14-4-14 4-14 4v20z" fill="#f59e0b" />
-                    <path d="M16 2v20" stroke="#0d1326" stroke-width="2"/>
-                    <polygon points="16,8 18,12 22,12 19,15 20,19 16,17 12,19 13,15 10,12 14,12" fill="#ffffff"/>
-                </svg>
-            </div>
-            <div class="text-box">
-                <div class="archive-title">The Seventh Archive</div>
-                <div class="archive-desc">Simple and beautiful interface with suggested book topics.</div>
-            </div>
-        </a>
-
-        <!-- آرشیو ۸: اوپن‌استکس - دو کتاب سه‌بعدی تابلوی روی هم چیده شده دانشگاهی با زاویه دید خارق‌العاده -->
-        <a href="https://openstax.org" target="_blank" class="archive-row">
-            <div class="icon-box">
-                <svg class="book-icon-master" viewBox="0 0 32 32">
-                    <defs>
-                        <linearGradient id="grad8" x1="0%" y1="0%" x2="100%" y2="0%">
-                            <stop offset="0%" style="stop-color:#6366f1;stop-opacity:1" />
-                            <stop offset="100%" style="stop-color:#4f46e5;stop-opacity:1" />
-                        </linearGradient>
-                    </defs>
-                    <rect x="6" y="12" width="20" height="14" rx="3" fill="url(#grad8)"/>
-                    <rect x="4" y="6" width="20" height="14" rx="3" fill="#38bdf8"/>
-                    <path d="M4 16h20M6 22h20" stroke="#ffffff" stroke-width="2"/>
-                </svg>
-            </div>
-            <div class="text-box">
-                <div class="archive-title">The Eighth Archive</div>
-                <div class="archive-desc">Millions of high-quality, standard-compliant textbooks (specially designed for students).</div>
-            </div>
-        </a>
-
-        <!-- آرشیو ۹: استاندارد ایبوکس - منشور چندوجهی الماس کریستالی بر روی لوح چاپی لوکس -->
-        <a href="https://standardebooks.org" target="_blank" class="archive-row">
-            <div class="icon-box">
-                <svg class="book-icon-master" viewBox="0 0 32 32">
-                    <defs>
-                        <linearGradient id="grad9" x1="0%" y1="0%" x2="100%" y2="100%">
-                            <stop offset="0%" style="stop-color:#a855f7;stop-opacity:1" />
-                            <stop offset="100%" style="stop-color:#ec4899;stop-opacity:1" />
-                        </linearGradient>
-                    </defs>
-                    <polygon points="16,2 28,10 24,26 8,26 4,10" fill="url(#grad9)"/>
-                    <polygon points="16,6 24,12 20,22 12,22 8,12" fill="#ffffff" opacity="0.3"/>
-                    <path d="M12 14h8M10 18h12" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round"/>
-                </svg>
-            </div>
-            <div class="text-box">
-                <div class="archive-title">The Ninth Archive</div>
-                <div class="archive-desc">Free high-quality classic ebooks in EPUB and Kindle formats.</div>
-            </div>
-        </a>
-
-        <!-- آرشیو ۱۰: بوک‌بون - کتاب هندسی چندبعدی باز شده با برگه طلایی متصل به فناوری یادگیری الکترونیک -->
-        <a href="https://bookboon.com" target="_blank" class="archive-row">
-            <div class="icon-box">
-                <svg class="book-icon-master" viewBox="0 0 32 32">
-                    <path d="M16 4L4 12v12l12 4 12-4V12L16 4z" fill="#1d4ed8"/>
-                    <path d="M16 4v24l12-4V12L16 4z" fill="#2563eb"/>
-                    <path d="M7 13.5l9 3.5 9-3.5" fill="none" stroke="#00f0ff" stroke-width="2"/>
-                </svg>
-            </div>
-            <div class="text-box">
-                <div class="archive-title">The Tenth Archive</div>
-                <div class="archive-desc">Free academic and business books, great for students and learning skills.</div>
-            </div>
-        </a>
-
-        <!-- آرشیو ۱۱: فری ایبوکس - نماد خلاقانه ابر دیجیتال نگهبان باران پی‌دی‌اف و کتاب‌های دانلودی -->
-        <a href="https://free-ebooks.net" target="_blank" class="archive-row">
-            <div class="icon-box">
-                <svg class="book-icon-master" viewBox="0 0 32 32">
-                    <defs>
-                        <linearGradient id="grad11" x1="0%" y1="0%" x2="100%" y2="100%">
-                            <stop offset="0%" style="stop-color:#00f0ff;stop-opacity:1" />
-                            <stop offset="100%" style="stop-color:#3b82f6;stop-opacity:1" />
-                        </linearGradient>
-                    </defs>
-                    <path d="M26 15a7 7 0 0 0-13.93-1A5.5 5.5 0 0 0 3 19.5 5.5 5.5 0 0 0 8.5 25h17a4.5 4.5 0 0 0 0-9z" fill="url(#grad11)"/>
-                    <path d="M12 14v6h4l-4 4-4-4h4v-6z" fill="#ffffff"/>
-                </svg>
-            </div>
-            <div class="text-box">
-                <div class="archive-title">The Eleventh Archive</div>
-                <div class="archive-desc">Free e-Books Thousands of novels, educational and scientific ebooks in PDF or EPUB.</div>
-            </div>
-        </a>
-
-    </div> <!-- انتهای کانتینر .archive-list -->
-
-<!-- سوشیال بار - همیشه فعال -->
-<script src="https://speedingdeadlyplays.com/b3/e9/4d/b3e94d023432c8cb40b981d7804166a2.js"></script>
-
-<!-- بنر شناور پایین صفحه -->
-<div id="floating-ad"></div>
-
-<style>
-#floating-ad{
-    position:fixed;
-    left:50%;
-    transform:translateX(-50%);
-    bottom:0;
-    z-index:999999999;
-
-    width:auto;
-    height:auto;
-
-    display:flex;
-    justify-content:center;
-    align-items:center;
-
-    pointer-events:auto;
-}
-
-/* فاصله برای اینکه محتوا زیر بنر نرود */
-body{
-    padding-bottom:110px;
-}
-</style>
-
-<script>
-
-(function(){
-
-let key="";
-let width=0;
-let height=0;
-
-const w=window.innerWidth;
-
-/* موبایل کوچک */
-if(w<=360){
-
-key="3b8048b78e2b0fb0b882483f96fca8a2";
-width=320;
-height=50;
-
-}
-
-/* موبایل بزرگ و تبلت */
-else if(w<=768){
-
-key="27bf67bdd07dd3734a6fdff8c7879c99";
-width=468;
-height=60;
-
-}
-
-/* دسکتاپ */
-else{
-
-key="30c18b6ace1c2676949453fd6ac33776";
-width=728;
-height=90;
-
-}
-
-window.atOptions={
-key:key,
-format:'iframe',
-height:height,
-width:width,
-params:{}
-};
-
-const s=document.createElement("script");
-
-s.src=
-"https://speedingdeadlyplays.com/"
-+key+
-"/invoke.js";
-
-s.async=true;
-
-document
-.getElementById("floating-ad")
-.appendChild(s);
-
-})();
-
-</script>
+    <!-- خط کپی‌رایت فلات‌آیکون درخواستی شما -->
+    <div class="attribution">
+        <a href="https://www.flaticon.com/free-icons/telegram" title="telegram icons">Telegram icons created by See Icons - Flaticon</a>
+    </div>
 
 </body>
 </html>
